@@ -68,8 +68,13 @@ namespace nothinbutdotnetprep.specs
         Establish c = () =>
             movie_collection.add_all(new Movie(), new Movie());
 
+<<<<<<< HEAD
+            It should_return_the_number_of_all_movies_in_the_library = () => { number_of_movies.ShouldEqual(2); };
+        }
+=======
         Because b = () =>
             number_of_movies = sut.all_movies().Count();
+>>>>>>> pull_jasona_alpha
 
         It should_return_the_number_of_all_movies_in_the_library = () => { number_of_movies.ShouldEqual(2); };
     }
@@ -81,6 +86,14 @@ namespace nothinbutdotnetprep.specs
         Establish c = () =>
             Enumerable.Range(1, 100).each(x => movie_collection.Add(new Movie()));
 
+<<<<<<< HEAD
+            Because b = () => 
+                all_movies = sut.all_movies();
+
+            It should_receive_a_set_containing_each_movie_in_the_library = () =>
+                all_movies.ShouldContainOnly(first_movie, second_movie);
+        }
+=======
         Because b = () =>
             results = sut.all_movies();
 
@@ -97,6 +110,7 @@ namespace nothinbutdotnetprep.specs
         static Movie first_movie;
         static Movie second_movie;
         static IEnumerable<Movie> all_movies;
+>>>>>>> pull_jasona_alpha
 
         Establish c = () =>
         {
