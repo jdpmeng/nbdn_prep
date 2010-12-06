@@ -30,11 +30,24 @@ namespace nothinbutdotnetprep.collections
             return movies.Contains(movie);
         }
 
-        public IEnumerable<Movie> all_movies_published_by_pixar()
+        public delegate bool SearchCriteria(Movie m);
+
+        public IEnumerable<Movie> all_movies(SearchCriteria searchCriteria)
         {
             foreach (var m in movies)
-                if (m.production_studio == ProductionStudio.Pixar)
+                if (searchCriteria(m))
                     yield return m;
+        }
+
+        private bool search_pixar(Movie m)
+        {
+            return (m.production_studio == ProductionStudio.Pixar);
+        }
+
+        public IEnumerable<Movie> all_movies_published_by_pixar()
+        {
+            SearchCriteria searchCriteria = new SearchCriteria(search_pixar);
+            return all_movies(searchCriteria);
         }
 
         public IEnumerable<Movie> all_movies_published_between_years(int startingYear, int endingYear)
