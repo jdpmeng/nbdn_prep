@@ -6,6 +6,13 @@ namespace nothinbutdotnetprep.infrastructure
 {
     public static class EnumerableExtensions
     {
+        public static IEnumerable<T> sort_using<T>(this IEnumerable<T> items,IComparer<T> comparer)
+        {
+            var sorted = new List<T>(items);
+            sorted.Sort(comparer);
+            return sorted;
+        }
+
         public static IEnumerable<T> one_at_a_time<T>(this IEnumerable<T> items)
         {
             foreach (var item in items) yield return item;

@@ -270,6 +270,7 @@ namespace nothinbutdotnetprep.specs
 
             It should_be_able_to_find_all_action_movies = () =>
             {
+
                 var criteria = Where<Movie>.has_a(x => x.genre)
                                            .equal_to(Genre.action);
 
@@ -290,7 +291,9 @@ namespace nothinbutdotnetprep.specs
 
             It should_be_able_to_sort_all_movies_by_title_descending = () =>
             {
-                var results = sut.sort_all_movies_by_title_descending;
+                var comparer = //fill in the blanks
+
+                var results = sut.all_movies().sort_using(comparer);
 
                 results.ShouldContainOnlyInOrder(theres_something_about_mary, the_ring, shrek,
                                                  pirates_of_the_carribean, indiana_jones_and_the_temple_of_doom,
