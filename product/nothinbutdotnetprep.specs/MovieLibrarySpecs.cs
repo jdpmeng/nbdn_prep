@@ -290,8 +290,10 @@ namespace nothinbutdotnetprep.specs
                  * without the need for using explicit methods. For this exercise, no linq queries are allowed!!. */
 
             It should_be_able_to_sort_all_movies_by_title_descending = () =>
-            {
-                var comparer = //fill in the blanks
+                                                                           {
+                                                                               var comparer =
+                                                                                   ComparerWhere<Movie>.sort_by(
+                                                                                       x => x.title).descending;
 
                 var results = sut.all_movies().sort_using(comparer);
 
