@@ -15,7 +15,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies()
         {
-            return all_movies().one_at_a_time();
+            return movies.one_at_a_time();
         }
 
         public void add(Movie movie)

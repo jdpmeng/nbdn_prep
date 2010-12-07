@@ -234,7 +234,7 @@ namespace nothinbutdotnetprep.specs
             {
                 //var results = sut.all_movies_published_after(2004);
 
-                var criteria = Where<Movie>.has_a(x => x.date_published.Year)
+                var criteria = Where<Movie>.has_an(x => x.date_published.Year)
                                            .greater_than(2004);
 
                 var results = sut.all_movies().all_items_matching(criteria);
@@ -246,7 +246,7 @@ namespace nothinbutdotnetprep.specs
             {
                 //var results = sut.all_movies_published_between_years(1982, 2003);
 
-                var criteria = Where<Movie>.has_a(x => x.date_published.Year)
+                var criteria = Where<Movie>.has_an(x => x.date_published.Year)
                                            .between(1982, 2003);
 
                 var results = sut.all_movies().all_items_matching(criteria);
