@@ -1,21 +1,20 @@
 using System;
 using System.Collections.Generic;
-using nothinbutdotnetprep.collections;
 
 namespace nothinbutdotnetprep.infrastructure.searching
 {
     public class Where<ItemToFilter>
     {
-        public static CriteriaFactory<ItemToFilter,PropertyType> has_a<PropertyType>(
+        public static CriteriaFactory<ItemToFilter, PropertyType> has_a<PropertyType>(
             Func<ItemToFilter, PropertyType> property_accessor)
         {
             return new CriteriaFactory<ItemToFilter, PropertyType>(property_accessor);
         }
     }
 
-    public class CriteriaFactory<ItemToFilter,PropertyType>
+    public class CriteriaFactory<ItemToFilter, PropertyType>
     {
-        Func<ItemToFilter,PropertyType> property_accessor;
+        Func<ItemToFilter, PropertyType> property_accessor;
 
         public CriteriaFactory(Func<ItemToFilter, PropertyType> property_accessor)
         {
@@ -31,12 +30,11 @@ namespace nothinbutdotnetprep.infrastructure.searching
         {
             return
                 new AnonymousCriteria<ItemToFilter>(x => new List<PropertyType>(values).Contains(property_accessor(x)));
-
         }
 
         public Criteria<ItemToFilter> not_equal_to(PropertyType value_to_equal)
         {
-            return new NotCriteria<ItemToFilter> (equal_to(value_to_equal));
+            return new NotCriteria<ItemToFilter>(equal_to(value_to_equal));
         }
     }
 }
