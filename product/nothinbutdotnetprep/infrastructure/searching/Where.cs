@@ -33,5 +33,10 @@ namespace nothinbutdotnetprep.infrastructure.searching
                 new AnonymousCriteria<ItemToFilter>(x => new List<PropertyType>(values).Contains(property_accessor(x)));
 
         }
+
+        public Criteria<ItemToFilter> not_equal_to(PropertyType value_to_equal)
+        {
+            return new AnonymousCriteria<ItemToFilter>(x => !property_accessor(x).Equals(value_to_equal));
+        }
     }
 }
