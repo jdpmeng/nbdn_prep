@@ -206,7 +206,7 @@ namespace nothinbutdotnetprep.specs
 
                 var results = sut.all_movies().all_items_matching(criteria);
 
-                results.ShouldContainOnly(cars, a_bugs_life);
+                results.ShouldContain(cars, a_bugs_life);
             };
 
             It should_be_able_to_find_all_movies_published_by_pixar_or_disney = () =>
@@ -223,7 +223,7 @@ namespace nothinbutdotnetprep.specs
             It should_be_able_to_find_all_movies_not_published_by_pixar = () =>
             {
                 var criteria = Where<Movie>.has_a(x => x.production_studio)
-                                           .not_equal_to(ProductionStudio.Pixar);
+                                           .not.equal_to(ProductionStudio.Pixar);
 
                 var results = sut.all_movies().all_items_matching(criteria);
 

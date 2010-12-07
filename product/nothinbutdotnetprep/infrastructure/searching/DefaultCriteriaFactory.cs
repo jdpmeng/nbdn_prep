@@ -11,6 +11,11 @@ namespace nothinbutdotnetprep.infrastructure.searching
             this.property_accessor = property_accessor;
         }
 
+        public NotDefaultCriteriaFactory<ItemToFilter, PropertyType> not
+        {
+            get { return new NotDefaultCriteriaFactory<ItemToFilter, PropertyType>(this); }
+        }
+
         public Criteria<ItemToFilter> equal_to(PropertyType value_to_equal)
         {
             return equal_to_any(value_to_equal);
@@ -32,4 +37,36 @@ namespace nothinbutdotnetprep.infrastructure.searching
                                                                     real_criteria); 
         }
     }
+
+    public class NotDefaultCriteriaFactory<ItemToFilter, PropertyType> : CriteriaFactory<ItemToFilter, PropertyType>
+    {
+        private readonly CriteriaFactory<ItemToFilter, PropertyType> _factory;
+
+        public NotDefaultCriteriaFactory(CriteriaFactory<ItemToFilter, PropertyType> factory)
+        {
+            _factory = factory;
+        }
+
+        public Criteria<ItemToFilter>  equal_to(PropertyType value_to_equal)
+        {
+            return _factory.not_equal_to(value_to_equal);
+        }
+
+        public Criteria<ItemToFilter>  equal_to_any(params PropertyType[] values)
+        {
+ 	        throw new NotImplementedException();
+        }
+
+        public Criteria<ItemToFilter>  not_equal_to(PropertyType value_to_equal)
+        {
+ 	        throw new NotImplementedException();
+        }
+
+        public Criteria<ItemToFilter>  create_for(Criteria<PropertyType> real_criteria)
+        {
+ 	        throw new NotImplementedException();
+        }
+    }
+
+
 }
