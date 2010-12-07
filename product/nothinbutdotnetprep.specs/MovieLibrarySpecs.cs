@@ -5,9 +5,9 @@ using Machine.Specifications;
 using Machine.Specifications.DevelopWithPassion.Extensions;
 using Machine.Specifications.DevelopWithPassion.Rhino;
 using nothinbutdotnetprep.collections;
+using nothinbutdotnetprep.infrastructure;
 using nothinbutdotnetprep.infrastructure.searching;
 using nothinbutdotnetprep.tests.utility;
-using nothinbutdotnetprep.infrastructure;
 
 /* The following set of Contexts (TestFixture) are in place to specify the functionality that you need to complete for the MovieLibrary class.
  * MovieLibrary is an aggregate root for the Movie class. it exposes the ability to search,sort, and iterate over all of the movies that it aggregates.
@@ -202,7 +202,7 @@ namespace nothinbutdotnetprep.specs
             It should_be_able_to_find_all_movies_published_by_pixar = () =>
             {
                 var criteria = Where<Movie>.has_a(x => x.production_studio)
-                                           .equal_to(ProductionStudio.Pixar);
+                    .equal_to(ProductionStudio.Pixar);
 
                 var results = sut.all_movies().all_items_matching(criteria);
 
@@ -212,21 +212,17 @@ namespace nothinbutdotnetprep.specs
             It should_be_able_to_find_all_movies_published_by_pixar_or_disney = () =>
             {
                 var criteria = Where<Movie>.has_a(x => x.production_studio)
-                                           .equal_to_any(ProductionStudio.Pixar,ProductionStudio.Disney);
+                    .equal_to_any(ProductionStudio.Pixar, ProductionStudio.Disney);
 
                 var results = sut.all_movies().all_items_matching(criteria);
-
 
                 results.ShouldContainOnly(a_bugs_life, pirates_of_the_carribean, cars);
             };
 
             It should_be_able_to_find_all_movies_not_published_by_pixar = () =>
             {
-
-
                 var criteria = Where<Movie>.has_a(x => x.production_studio)
-                                           .not.equal_to(ProductionStudio.Pixar);
-
+                    .not.equal_to(ProductionStudio.Pixar);
 
                 var results = sut.all_movies().all_items_matching(criteria);
 
@@ -238,7 +234,7 @@ namespace nothinbutdotnetprep.specs
                 //var results = sut.all_movies_published_after(2004);
 
                 var criteria = Where<Movie>.has_a(x => x.date_published.Year)
-                                           .greater_than(2004);
+                    .greater_than(2004);
 
                 var results = sut.all_movies().all_items_matching(criteria);
 
@@ -250,7 +246,7 @@ namespace nothinbutdotnetprep.specs
                 //var results = sut.all_movies_published_between_years(1982, 2003);
 
                 var criteria = Where<Movie>.has_a(x => x.date_published.Year)
-                                           .between(1982, 2003);
+                    .between(1982, 2003);
 
                 var results = sut.all_movies().all_items_matching(criteria);
 
@@ -260,22 +256,19 @@ namespace nothinbutdotnetprep.specs
             It should_be_able_to_find_all_kid_movies = () =>
             {
                 var criteria = Where<Movie>.has_a(x => x.genre)
-                                           .equal_to(Genre.kids);
+                    .equal_to(Genre.kids);
 
                 var results = sut.all_movies().all_items_matching(criteria);
-
 
                 results.ShouldContainOnly(a_bugs_life, shrek, cars);
             };
 
             It should_be_able_to_find_all_action_movies = () =>
             {
-
                 var criteria = Where<Movie>.has_a(x => x.genre)
-                                           .equal_to(Genre.action);
+                    .equal_to(Genre.action);
 
                 var results = sut.all_movies().all_items_matching(criteria);
-
 
                 results.ShouldContainOnly(indiana_jones_and_the_temple_of_doom, pirates_of_the_carribean);
             };
@@ -290,10 +283,8 @@ namespace nothinbutdotnetprep.specs
                  * without the need for using explicit methods. For this exercise, no linq queries are allowed!!. */
 
             It should_be_able_to_sort_all_movies_by_title_descending = () =>
-                                                                           {
-                                                                               var comparer =
-                                                                                   ComparerWhere<Movie>.sort_by(
-                                                                                       x => x.title).descending;
+            {
+                var comparer = Order<Movie>.by_descending(x => x.title);
 
                 var results = sut.all_movies().sort_using(comparer);
 
