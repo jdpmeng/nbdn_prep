@@ -10,6 +10,7 @@ namespace nothinbutdotnetprep.infrastructure.searching
         {
             return new CriteriaFactory<ItemToFilter, PropertyType>(property_accessor);
         }
+
     }
 
     public class CriteriaFactory<ItemToFilter, PropertyType>
@@ -36,5 +37,16 @@ namespace nothinbutdotnetprep.infrastructure.searching
         {
             return new NotCriteria<ItemToFilter>(equal_to(value_to_equal));
         }
+
+        public Criteria<ItemToFilter> greater_than<ComparablePropertyType>(ComparablePropertyType value) where ComparablePropertyType : PropertyType, IComparable
+        {
+            return new AnonymousCriteria<ItemToFilter>(x => (value.CompareTo(property_accessor(x)) < 0 ? true : false));
+        }
+
+        public Criteria<ItemToFilter> between<ComparablePropertyType>(ComparablePropertyType startValue, ComparablePropertyType endValue) where ComparablePropertyType : PropertyType, IComparable
+        {
+            return new AnonymousCriteria<ItemToFilter>(x => ((startValue.CompareTo(property_accessor(x)) <= 0 && endValue.CompareTo(property_accessor(x)) >= 0) ? true : false));
+        }
+
     }
 }
