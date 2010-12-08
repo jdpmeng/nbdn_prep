@@ -1,4 +1,6 @@
-﻿namespace nothinbutdotnetprep.infrastructure.searching
+﻿using System.Collections.Generic;
+
+namespace nothinbutdotnetprep.infrastructure.searching
 {
     public interface Criteria<Item>
     {
